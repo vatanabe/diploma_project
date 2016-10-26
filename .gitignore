@@ -3,6 +3,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+db.py
+LICENSE
+PySide-1.2.2-cp34-none-win_amd64.whl
+README.md
+test.py
+
 # C extensions
 *.so
 

@@ -26,12 +26,15 @@ class Product(Base):
     front_side_print = Column(String(50))
     back_side_image = Column(String(50))
     back_side_print = Column(String(50))
+    city = Column(String(20))
+    images_pixels = Column(String(9))
+
     
 
     def __init__(self, product_name=None, product_code=None, special_code=None, \
         contactless_interface=None, link_contactless=None, chip=None, \
         vendor=None, add_date=None, front_side_image=None, front_side_print=None, \
-        back_side_imager=None, back_side_print=None):
+        back_side_imager=None, back_side_print=None, city=None, images_pixels=None):
         self.product_name = product_name
         self.product_code = product_code
         self.special_code = special_code
@@ -44,14 +47,16 @@ class Product(Base):
         self.front_side_print = front_side_print
         self.back_side_image = back_side_image
         self.back_side_print = back_side_print
+        self.city = city
+        self.images_pixels = images_pixels
 
 
     def __repr__(self):
-        return '<Product {} {} {} {} {} {} {} {} {} {} {} {}>' .format(\
+        return '<Product {} {} {} {} {} {} {} {} {} {} {} {} {} {}>' .format(\
             self.product_name, self.product_code , self.special_code, \
             self.contactless_interface, self.link_contactless, self.chip, \
             self.vendor, self.add_date, self.front_side_image, self.front_side_prin, \
-            self.back_side_image, self.back_side_print)
+            self.back_side_image, self.back_side_print, self.city, self.images_pixels)
 
 
 class Action(Base):
