@@ -8,7 +8,6 @@ class Browser(QMainWindow):
 
     def __init__(self):
         QMainWindow.__init__(self)
-        self.resize(800, 600)
         self.web_view = QWebView()
         self.setCentralWidget(self.web_view)
 
@@ -26,5 +25,5 @@ if __name__ == '__main__':
     browser = Browser() 
     r = QUrl("http://127.0.0.1:5000/1")
     browser.web_view.load(r)
-    browser.show()
+    browser.showMaximized()
     app.exec_()
