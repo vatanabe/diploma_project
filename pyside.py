@@ -1,20 +1,30 @@
-# Allow access to command-line arguments
-import sys
- 
-# Import the core and GUI elements of Qt
-from PySide.QtCore import *
-from PySide.QtGui import *
- 
-# Every Qt application must have one and only one QApplication object;
-# it receives the command line arguments passed to the script, as they
-# can be used to customize the application's appearance and behavior
-qt_app = QApplication(sys.argv)
- 
-# Create a label widget with our text
-label = QLabel('Hello, world!')
- 
-# Show it as a standalone widget
-label.show()
- 
-# Run the application's event loop
-qt_app.exec_()
+import sys 
+from PySide.QtCore import QUrl, QSize
+from PySide.QtGui import QApplication, QMainWindow, QWidget
+from PySide.QtWebKit import QWebView
+
+
+class Browser(QMainWindow):
+
+    def __init__(self):
+        QMainWindow.__init__(self)
+        self.resize(800, 600)
+        self.web_view = QWebView()
+        self.setCentralWidget(self.web_view)
+
+        self.web_view.loadFinished.connect(self._load_finished)
+
+    def _load_finished(self):
+        frame = self.web_view.page().mainFrame()
+        self.web_view.page().setViewportSize(frame.contentsSize())
+        self.resize(frame.contentsSize())
+        html_data = frame.toHtml()
+
+
+if __name__ == '__main__': 
+    app = QApplication(sys.argv) 
+    browser = Browser() 
+    r = QUrl("http://127.0.0.1:5000/1")
+    browser.web_view.load(r)
+    browser.show()
+    app.exec_()
