@@ -7,9 +7,10 @@ for file in os.listdir(path):
     if fnmatch.fnmatch(file, 'OMG*'): #Поиск среди файлов текущей папки по маске
         full_path = os.path.join("/", path, file)
 with open(full_path, 'r') as myfile: #Чтение файла построчно
-    lines = myfile.readlines()
-    data = lines[1:-1]
+    lines = myfile.readlines() #Список, содержащий строки файла
+    data = lines[1:-1] #Обрезаем шапку и последнюю строку
     data_list = []
     for string in data:
-        data_list.append(string[272:274])
-    values_count = Counter(data_list)
+        data_list.append(string[272:274]) #Извлекаем из каждой строки нужное значение и создаем список с этими значениями
+    data_length = len(data_list)
+    values_count = Counter(data_list) #Счётчик количества одинаковых значений
