@@ -8,7 +8,7 @@
 #  Zhigulyovsk
 #  Novosibirsk
 #  Tolyaytti_pp
-#  Novoaltaisp_pp
+#  Novoaltaisk_pp
 #  Orenburg_pp
 # где ###### - идентификатор продукта третьего типа
 # количество строк в файле - количество единиц продукта объявленного в названии

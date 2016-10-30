@@ -14,12 +14,14 @@ Base.query = db_session.query_property()
 class Product(Base):
     __tablename__ = 'products'
     id = Column(Integer, primary_key=True)
-    product_bin = Column(Integer)
+    product_bin = Column(String(8))
     product_name = Column(String(50), unique=True)
     product_code = Column(String(2))
-    special_code = Column(String(12), unique=True)
-    parent_id = Column(Integer, ForeignKey(products.id))
+    special_code = Column(String(12))
+    city_code = Column(String(20))
+    parent_id = Column(Integer, ForeignKey('products.id'))
     used = Column(Boolean)
+    special_design = Column(Boolean)
     contactless_interface = Column(Boolean)
     link_contactless = Column(Boolean)
     chip = Column(String(20))
@@ -35,15 +37,17 @@ class Product(Base):
     
 
     def __init__(self, product_bin=None ,product_name=None, product_code=None, special_code=None, \
-        parent_id=None, used=None, contactless_interface=None, link_contactless=None, chip=None, \
+        city_code=None, parent_id=None, used=None, special_design=None, contactless_interface=None, link_contactless=None, chip=None, \
         vendor=None, add_date=None, front_side_image=None, front_side_print=None, \
-        back_side_imager=None, back_side_print=None, city=None, images_pixels=None):
+        back_side_image=None, back_side_print=None, city=None, images_pixels=None):
         self.product_bin = product_bin
         self.product_name = product_name
         self.product_code = product_code
         self.special_code = special_code
+        self.city_code = city_code
         self.parent_id = parent_id
         self.used = used
+        self.special_design = special_design
         self.contactless_interface = contactless_interface
         self.link_contactless = link_contactless
         self.chip = chip
@@ -60,7 +64,8 @@ class Product(Base):
     def __repr__(self):
         return '<Product {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {}>' .format(\
             self.product_bin, self.product_name, self.product_code , self.special_code, \
-            self.parent_id, self.used, self.contactless_interface, self.link_contactless, self.chip, \
+            self.city_code, self.parent_id, self.used, self.special_design, \
+            self.contactless_interface, self.link_contactless, self.chip, \
             self.vendor, self.add_date, self.front_side_image, self.front_side_print, \
             self.back_side_image, self.back_side_print, self.city, self.images_pixels)
 
@@ -101,10 +106,12 @@ class Storage(Base):
     product_quantity = Column(Integer)
     action_id = Column(Integer, ForeignKey('actions.id'))
     product_id = Column(Integer, ForeignKey('products.id'))
+    on_balance = Column(Boolean)
 
 
     def __init__(self, locker=None, locker_level=None, level_spot=None, \
-        product_type=None, product_quantity=None, action_id=None, product_id=None):
+        product_type=None, product_quantity=None, action_id=None, product_id=None, \
+        on_balance=None):
         self.locker = locker
         self.locker_level = locker_level
         self.level_spot = level_spot
@@ -112,11 +119,12 @@ class Storage(Base):
         self.product_quantity = product_quantity
         self.action_id = action_id
         self.product_id = product_id
+        self.on_balance = on_balance
 
     def __repr__(self):
-        return '<Product {} {} {} {} {} {} {}>' .format(\
+        return '<Product {} {} {} {} {} {} {} {}>' .format(\
         self.locker, self.locker_level, self.level_spot, \
-        self.product_type, self.product_quantity, self.action_id, self.product_id)
+        self.product_type, self.product_quantity, self.action_id, self.product_id, self.on_balance)
 
 
 
