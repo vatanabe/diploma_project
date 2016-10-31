@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Boolean
+from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Boolean, Date
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -26,7 +26,7 @@ class Product(Base):
     link_contactless = Column(Boolean)
     chip = Column(String(20))
     vendor = Column(String(20))
-    add_date = Column(DateTime)
+    add_date = Column(Date)
     front_side_image = Column(String(50))
     front_side_print = Column(String(50))
     back_side_image = Column(String(50))
@@ -106,12 +106,12 @@ class Storage(Base):
     product_quantity = Column(Integer)
     action_id = Column(Integer, ForeignKey('actions.id'))
     product_id = Column(Integer, ForeignKey('products.id'))
-    on_balance = Column(Boolean)
+    out_of_balance = Column(Boolean)
 
 
     def __init__(self, locker=None, locker_level=None, level_spot=None, \
         product_type=None, product_quantity=None, action_id=None, product_id=None, \
-        on_balance=None):
+        out_of_balance=None):
         self.locker = locker
         self.locker_level = locker_level
         self.level_spot = level_spot
@@ -119,13 +119,22 @@ class Storage(Base):
         self.product_quantity = product_quantity
         self.action_id = action_id
         self.product_id = product_id
-        self.on_balance = on_balance
+        self.out_of_balance = out_of_balance
 
     def __repr__(self):
         return '<Product {} {} {} {} {} {} {} {}>' .format(\
         self.locker, self.locker_level, self.level_spot, \
-        self.product_type, self.product_quantity, self.action_id, self.product_id, self.on_balance)
+        self.product_type, self.product_quantity, self.action_id, self.product_id, self.out_of_balance)
 
+#new
+#white
+#colored
+#colored_reject
+#perso_reject
+#input_reject
+#demo
+#test
+#pre_perso
 
 
 

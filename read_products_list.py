@@ -5,12 +5,13 @@ from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Bool
 
 prod_list = []
 
-with open('products_list2.csv', 'r', encoding='windows-1251') as f:
+with open('products_list.csv', 'r', encoding='windows-1251') as f:
     fields = ['product_bin', 'product_name', 'product_code', 'special_code', \
     'city_code', 'parent_id', 'used', 'special_design', 'contactless_interface', \
     'link_contactless', 'chip', 'vendor', 'add_date', 'front_side_image', \
     'front_side_print', 'back_side_image', 'back_side_print', 'city', 'images_pixels']
     reader = csv.DictReader(f, fields, delimiter=';')
+    next(reader)
     for row in reader:
         try:
             row['parent_id'] = int(row['parent_id'])
@@ -40,7 +41,8 @@ with open('products_list2.csv', 'r', encoding='windows-1251') as f:
         if  row['add_date'] != '':
             row['add_date'] = datetime.datetime.strptime(row['add_date'], '%d.%m.%Y')
         else:
-            row['add_date'] = datetime.datetime(2001, 1, 1, 1, 1, 1)
+#            row['add_date'] = datetime.datetime(2001, 1, 1, 1, 1, 1)
+            row['add_date'] = None
 #        except ValueError:
 #            row['add_date'] = datetime(2001, 1, 1, 1, 1, 1)
         prod_list.append(row)
