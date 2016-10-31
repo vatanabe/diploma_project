@@ -10,5 +10,5 @@ with open(full_path, 'r', encoding='utf-8') as myfile: #Чтение файла 
     lines = myfile.readlines() #Чтение файла построчно
     data_list = []
     for string in lines:
-        data_list.append(string[27:43].strip())  #Извлекаем из каждой строки нужное значение и создаем список с этими значениями
+        data_list.append(string[27:43].rstrip())  #Извлекаем из каждой строки нужное значение и создаем список с этими значениями
     values_count2 = Counter(data_list) #Счётчик количества одинаковых значений
