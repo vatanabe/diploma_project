@@ -23,7 +23,7 @@ class Browser(QMainWindow):
 if __name__ == '__main__': 
     app = QApplication(sys.argv) 
     browser = Browser() 
-    r = QUrl("http://127.0.0.1:5000/1")
+    r = QUrl("http://127.0.0.1:5000/")
     browser.web_view.load(r)
     browser.showMaximized()
     app.exec_()
