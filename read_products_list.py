@@ -8,7 +8,7 @@ prod_list = []
 with open('products_list.csv', 'r', encoding='windows-1251') as f:
     fields = ['product_bin', 'product_name', 'product_code', 'special_code', \
     'city_code', 'parent_id', 'used', 'special_design', 'contactless_interface', \
-    'link_contactless', 'chip', 'vendor', 'add_date', 'front_side_image', \
+    'link_contactless', 'add_date', 'prod_chip', 'prod_vendor', 'front_side_image', \
     'front_side_print', 'back_side_image', 'back_side_print', 'city', 'images_pixels']
     reader = csv.DictReader(f, fields, delimiter=';')
     next(reader)
@@ -17,14 +17,10 @@ with open('products_list.csv', 'r', encoding='windows-1251') as f:
             row['parent_id'] = int(row['parent_id'])
         except ValueError:
             row['parent_id'] = 0
-#        try:
         if row['used'] == 'used':
             row['used'] = bool(True)
         else:
             row['used'] = bool(False)
-#        except NameError:
-#            row['used'] = False
-#        print(row['used'])
         if row['special_design'] == 'yes':
             row['special_design'] = bool(True)
         else:
@@ -37,22 +33,18 @@ with open('products_list.csv', 'r', encoding='windows-1251') as f:
             row['link_contactless'] = bool(True)
         else:
             row['link_contactless'] = bool(False)
-#        try:
         if  row['add_date'] != '':
             row['add_date'] = datetime.datetime.strptime(row['add_date'], '%d.%m.%Y')
         else:
-#            row['add_date'] = datetime.datetime(2001, 1, 1, 1, 1, 1)
             row['add_date'] = None
-#        except ValueError:
-#            row['add_date'] = datetime(2001, 1, 1, 1, 1, 1)
         prod_list.append(row)
 
 
 for a in prod_list:
     products = Product(a['product_bin'], a['product_name'], a['product_code'], \
     a['special_code'], a['city_code'], a['parent_id'], a['used'], a['special_design'], \
-    a['contactless_interface'], a['link_contactless'], a['chip'], a['vendor'], \
-    a['add_date'], a['front_side_image'], a['front_side_print'], a['back_side_image'], \
+    a['contactless_interface'], a['link_contactless'], a['add_date'], a['prod_chip'], \
+    a['prod_vendor'], a['front_side_image'], a['front_side_print'], a['back_side_image'], \
     a['back_side_print'], a['city'], a['images_pixels'])
     db_session.add(products)
 
