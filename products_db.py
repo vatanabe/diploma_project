@@ -108,6 +108,7 @@ class Storage(Base):
     incoming = Column(Boolean)
     product_type = Column(String(20))
     product_quantity = Column(Integer)
+    max_spot_quantity = Column(Integer)
     action_id = Column(Integer, ForeignKey('actions.id'))
     product_id = Column(Integer, ForeignKey('products.id'))
     out_of_balance = Column(Boolean)
@@ -116,8 +117,8 @@ class Storage(Base):
 
 
     def __init__(self, locker=None, locker_level=None, level_spot=None, active_spot=None, \
-        incoming=None, product_type=None, product_quantity=None, action_id=None, product_id=None, \
-        out_of_balance=None, chip=None, vendor=None):
+        incoming=None, product_type=None, product_quantity=None, max_spot_quantity=None, \
+        action_id=None, product_id=None, out_of_balance=None, chip=None, vendor=None):
         self.locker = locker
         self.locker_level = locker_level
         self.level_spot = level_spot
@@ -125,6 +126,7 @@ class Storage(Base):
         self.incoming = incoming
         self.product_type = product_type
         self.product_quantity = product_quantity
+        self.max_spot_quantity = max_spot_quantity
         self.action_id = action_id
         self.product_id = product_id
         self.out_of_balance = out_of_balance
@@ -132,10 +134,10 @@ class Storage(Base):
         self.vendor = vendor
 
     def __repr__(self):
-        return '<Product {} {} {} {} {} {} {} {} {} {} {} {}>' .format(\
+        return '<Product {} {} {} {} {} {} {} {} {} {} {} {} {}>' .format(\
         self.locker, self.locker_level, self.level_spot, self.active_spot, self.incoming, \
-        self.product_type, self.product_quantity, self.action_id, self.product_id, \
-        self.out_of_balance, self.chip, self.vendor)
+        self.product_type, self.product_quantity, self.max_spot_quantity, self.action_id, \
+        self.product_id, self.out_of_balance, self.chip, self.vendor)
 
 #new
 #white

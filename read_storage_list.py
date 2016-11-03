@@ -7,7 +7,7 @@ storage_list = []
 
 with open('full_storage_on_level.csv', 'r', encoding='windows-1251') as f:
     fields = ['locker', 'locker_level', 'level_spot', 'active_spot', 'incoming', 'product_type', \
-    'product_quantity', 'action_id', 'product_id', 'out_of_balance', 'chip', 'vendor']
+    'product_quantity', 'max_spot_quantity', 'action_id', 'product_id', 'out_of_balance', 'chip', 'vendor']
     reader = csv.DictReader(f, fields, delimiter=';')
     next(reader)
     for row in reader:
@@ -23,6 +23,10 @@ with open('full_storage_on_level.csv', 'r', encoding='windows-1251') as f:
             row['product_quantity'] = int(row['product_quantity'])
         except ValueError:
             row['product_quantity'] = 0
+        try:
+            row['max_spot_quantity'] = int(row['max_spot_quantity'])
+        except ValueError:
+            row['max_spot_quantity'] = 0
         try:
             row['action_id'] = int(row['action_id'])
         except ValueError:
@@ -40,8 +44,8 @@ with open('full_storage_on_level.csv', 'r', encoding='windows-1251') as f:
 
 for a in storage_list:
     storage = Storage(a['locker'], a['locker_level'], a['level_spot'], a['active_spot'], a['incoming'], \
-    a['product_type'], a['product_quantity'], a['action_id'], a['product_id'], a['out_of_balance'], \
-    a['chip'], a['vendor'])
+    a['product_type'], a['product_quantity'],  a['max_spot_quantity'], a['action_id'], a['product_id'], \
+    a['out_of_balance'], a['chip'], a['vendor'])
     db_session.add(storage)
 
 db_session.commit()
