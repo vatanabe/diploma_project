@@ -11,14 +11,12 @@ def amount1(code):
         for product_id, in db_session.query(Storage.product_id).filter_by(product_id=id):
             print(id)
 
-
 def amount2(code):
-    (id,) = db_session.query(Product.id).filter_by(special_code=code)
-    product_quantity = db_session.query(Storage.product_quantity).filter_by(product_id=id)
-    print(product_quantity)
+    for (id,), (prod_chip,), (prod_vendor,) in db_session.query(Product.id, Product.prod_chip, Product.prod_vendor).filter_by(special_code=code):
+        for (product_quantity,) in db_session.query(Storage.product_quantity).filter_by(product_type='colored', product_id=id, chip=prod_chip, vendor=prod_vendor):
+            return product_quantity
+    return 0
 
-def search3(code):
+def amount3(code):
     for product_name, in db_session.query(Product.product_name).filter_by(city_code=code)[:1]: 
         return product_name
-
-amount2('ББ_99')

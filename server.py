@@ -3,6 +3,7 @@ from parsing1 import values_count
 from parsing2 import values_count2
 from parsing3 import data
 from product_search import search1, search2, search3
+from product_amount import amount1, amount2, amount3
 
 app = Flask(__name__)
 
@@ -20,9 +21,13 @@ def first():
 
 @app.route("/2")
 def second():
-    result = "<table><tr><th>Продукт</th><th>Количество</th></tr>"
+    result = "<table><tr><th>Продукт</th><th>Количество</th><th>На складе</th><th>Наличие</th></tr>"
     for name in values_count2:
-        result += "<tr><td>%s</td><td>%s</td></tr>" % (search2(name), values_count2[name])
+        if values_count2[name] <= amount2(name):
+            availability = "Достаточно"
+        else:
+            availability = "Нехватка"
+        result += "<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>" % (search2(name), values_count2[name], amount2(name), availability)
     result += "</table>"
     return result
 
