@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from parsing1 import values_count
+from parsing1 import values_count1
 from parsing2 import values_count2
 from parsing3 import data
 from product_search import search1, search2, search3
@@ -13,9 +13,13 @@ def index():
 
 @app.route("/1")
 def first():
-    result = "<table><tr><th>Продукт</th><th>Количество</th></tr>"
-    for name in values_count:
-        result += "<tr><td>%s</td><td>%s</td></tr>" % (search1(name), values_count[name])
+    result = "<table><tr><th>Продукт</th><th>Количество</th><th>На складе</th><th>Наличие</th></tr>"
+    for name in values_count1:
+        if values_count1[name] <= amount1(name):
+            availability = "Достаточно"
+        else:
+            availability = "Нехватка"
+        result += "<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>" % (search1(name), values_count1[name], amount1(name), availability)
     result += "</table>"
     return result
 
@@ -33,10 +37,13 @@ def second():
 
 @app.route("/3")
 def third():
-    result = "<table><tr><th>Продукт</th><th>Количество</th></tr>"
+    result = "<table><tr><th>Продукт</th><th>Количество</th><th>На складе</th><th>Наличие</th></tr>"
     for name in data:
-        print (name)
-        result += "<tr><td>%s</td><td>%s</td></tr>" % (search3(name), data[name])
+        if values_count2[name] <= amount3(name):
+            availability = "Достаточно"
+        else:
+            availability = "Нехватка"
+        result += "<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>" % (search3(name), data[name], amount3(name), availability)
     result += "</table>"
     return result
 
