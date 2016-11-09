@@ -31,15 +31,20 @@ def add_action():
     for filename in filenames:
         action = Action(datetime.now(), 0, filename, 0, 'product_id', 'reason', 'bot')      
         for (input_file_name,) in db_session.query(Action.input_file_name):
-            if input_file_name != filename:
-                copy_file()
-                db_session.add(action)
-                db_session.commit()
-                time.sleep(10)
-            else:
+            count = 0
+            if input_file_name == filename:
                 print("replay")
-                time.sleep(10)
-                
+                count += 1     
+            else:
+                print("else")
+        if count == 0:
+            copy_file()
+            db_session.add(action)
+            db_session.commit()
+            time.sleep(10)
+        else:
+            print("else2")
+
 while True:
     add_action()
     time.sleep(10)
