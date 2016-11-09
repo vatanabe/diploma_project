@@ -8,7 +8,7 @@ path = os.path.join("/", "projects", "test")
 
 def copy_file():
     for file in os.listdir(path):
-        if fnmatch.fnmatch(file, 'OMG*'): #Поиск среди файлов текущей папки по маске
+        if fnmatch.fnmatch(file, 'MIN_DESIGN*'): #Поиск среди файлов текущей папки по маске
             full_path = os.path.join("/", path, file) #Создание полного пути копируемого файла
             new_path = os.path.join("/", "projects", "test2", file) #Создание полного пути нового копируемого файла
             shutil.copyfile(full_path, new_path) #Выполнение копирования файла
