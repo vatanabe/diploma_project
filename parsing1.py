@@ -13,4 +13,4 @@ with open(full_path, 'r') as myfile: #Чтение файла построчно
     for string in data:
         data_list.append(string[272:274]) #Извлекаем из каждой строки нужное значение и создаем список с этими значениями
     data_length = len(data_list)
-    values_count = Counter(data_list) #Счётчик количества одинаковых значений
+    values_count1 = Counter(data_list) #Счётчик количества одинаковых значений
