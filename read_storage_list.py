@@ -6,19 +6,32 @@ from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Bool
 storage_list = []
 
 with open('full_storage_on_level.csv', 'r', encoding='windows-1251') as f:
-    fields = ['locker', 'locker_level', 'level_spot', 'active_spot', 'incoming', 'product_type', \
-    'product_quantity', 'max_spot_quantity', 'action_id', 'product_id', 'out_of_balance', 'chip', 'vendor']
+    fields = [
+    'locker',
+    'locker_level',
+    'level_spot',
+    'active_spot',
+    'incoming',
+    'product_type',
+    'product_quantity',
+    'max_spot_quantity',
+    'action_id',
+    'product_id',
+    'out_of_balance',
+    'chip',
+    'vendor'
+    ]
     reader = csv.DictReader(f, fields, delimiter=';')
     next(reader)
     for row in reader:
         if row['active_spot'] == 'yes':
-            row['active_spot'] = bool(True)
+            row['active_spot'] = True
         else:
-            row['active_spot'] = bool(False)
+            row['active_spot'] = False
         if row['incoming'] == 'yes':
-            row['incoming'] = bool(True)
+            row['incoming'] = True
         else:
-            row['incoming'] = bool(False)
+            row['incoming'] = False
         try:
             row['product_quantity'] = int(row['product_quantity'])
         except ValueError:
@@ -36,16 +49,28 @@ with open('full_storage_on_level.csv', 'r', encoding='windows-1251') as f:
         except ValueError:
             row['product_id'] = 0    
         if row['out_of_balance'] == 'yes':
-            row['out_of_balance'] = bool(True)
+            row['out_of_balance'] = True
         else:
-            row['out_of_balance'] = bool(False)
+            row['out_of_balance'] = False
         storage_list.append(row)
 
 
 for a in storage_list:
-    storage = Storage(a['locker'], a['locker_level'], a['level_spot'], a['active_spot'], a['incoming'], \
-    a['product_type'], a['product_quantity'],  a['max_spot_quantity'], a['action_id'], a['product_id'], \
-    a['out_of_balance'], a['chip'], a['vendor'])
+    storage = Storage(
+    locker = a['locker'],
+    locker_level = a['locker_level'],
+    level_spot = a['level_spot'],
+    active_spot = a['active_spot'],
+    incoming = a['incoming'],
+    product_type = a['product_type'],
+    product_quantity =  a['product_quantity'],
+    max_spot_quantity = a['max_spot_quantity'],
+    action_id = a['action_id'],
+    product_id = a['product_id'],
+    out_of_balance = a['out_of_balance'],
+    chip = a['chip'],
+    vendor = a['vendor']
+    )
     db_session.add(storage)
 
 db_session.commit()

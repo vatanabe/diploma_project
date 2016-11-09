@@ -13,8 +13,8 @@ product_bin;product_name;product_code;special_code;city_code;parent_id;used;spec
 889900;misa_positron1;12;;;11;used;;;;;;;d:\\there\\;d:\\there\\;d:\\there\\;d:\\there\\;;
 889900;misa_positron2;11;;;11;used;;;;;;;d:\\there\\;d:\\there\\;d:\\there\\;d:\\there\\;;
 898877;misa_glass;;;;10;;;;;;;;;;;;;
-898877;misa_glass1_with_pop;54;;;14;used;;yes;;20.05.2016;Abraham48_07BB;my_Frend;;;;;;
-898877;misa_glass2_with_pop;I5;;;14;used;;yes;;20.05.2016;Abraham48_07BB;my_Frend;;;;;;
+898877;misa_glass1_with_pop;54;;;14;used;;yes;;20.05.2016;Abraham48_07BB;my_Frend;d:\\there\\;;d:\\there\\;;;
+898877;misa_glass2_with_pop;I5;;;14;used;;yes;;20.05.2016;Abraham48_07BB;my_Frend;;;d:\\there\\;;;
 898877;misa_glass2_with_pop_sp1;I5;좋_99;;16;used;yes;yes;yes;20.05.2016;Abraham48_07BB;my_Frend;d:\\there\\;d:\\there\\;d:\\there\\;d:\\there\\;Kair;1033x789
 898877;misa_glass2_with_pop_sp2;I5;좋�_좋-좋�;;16;used;yes;yes;;20.06.2016;Abraham48_07BB;my_Frend;d:\\there\\;d:\\there\\;d:\\there\\;d:\\there\\;Kair;1033x789
 848456;misa_goldy;;;;10;;;;;;;;;;;;;
@@ -33,7 +33,7 @@ product_bin;product_name;product_code;special_code;city_code;parent_id;used;spec
 10235688;rip_elegant;;;;31;;;;;;;;;;;;;
 10235688;rip_elegant_1;H5;;;32;used;;;;27.09.2013;Abraham34_07TT;my_Frend;d:\\there\\;d:\\there\\;d:\\there\\;d:\\there\\;;
 10235611;rip_strong;;;;31;;;;;;;;;;;;;
-10235611;rip_strong1;N5;;;34;used;;;;20.08.2015;Abraham34_07TT;my_Frend;;;;;;
+10235611;rip_strong1;N5;;;34;used;;;;20.08.2015;Abraham34_07TT;my_Frend;;;d:\\there\\;;;
 10235611;rip_strong1_sp1;N5;CHEMPION;;35;used;yes;;;20.08.2015;Abraham34_07TT;my_Frend;d:\\there\\;d:\\there\\;d:\\there\\;d:\\there\\;;
 10235611;rip_strong1_sp2;N5;FLY-ONLY;;35;used;yes;;;27.09.2015;Abraham34_07TT;my_Frend;d:\\there\\;d:\\there\\;d:\\there\\;d:\\there\\;;
 10235611;rip_strong1_sp3;N5;DIRECTWEST;;35;used;yes;;;27.09.2015;Abraham34_07TT;my_Frend;d:\\there\\;d:\\there\\;d:\\there\\;d:\\there\\;;
@@ -41,7 +41,7 @@ product_bin;product_name;product_code;special_code;city_code;parent_id;used;spec
 10235611;rip_strong_with_wow;B4;;;34;used;;yes;yes;27.08.2016;Abraham48_07BB;my_Frend;d:\\there\\;d:\\there\\;d:\\there\\;d:\\there\\;;
 10235611;rip_strong_with_wow1;B5;;;40;used;;yes;;24.08.2016;Abraham48_07BB;my_Frend;d:\\there\\;d:\\there\\;d:\\there\\;d:\\there\\;;
 10235611;rip_strong_with_wow2;B6;;;40;used;;yes;yes;29.08.2016;Abraham48_07BB;my_Frend;d:\\there\\;d:\\there\\;d:\\there\\;d:\\there\\;;
-10235611;rip_strong_with_wow3;D8;;;40;;;;;;;;;;;;;
+10235611;rip_strong_with_wow3;D8;;;40;;;;;27.09.2016;Abraham48_07BB;my_Frend;;;d:\\there\\;;;
 10235611;rip_strong_with_wow3_sp1;D8;좋좋좋좋좋좋;;43;used;yes;yes;yes;27.09.2016;Abraham48_07BB;my_Frend;d:\\there\\;d:\\there\\;d:\\there\\;d:\\there\\;Kair;1033x789
 10235611;rip_strong_with_wow3_sp2;D8;MAAA;;43;used;yes;yes;yes;29.09.2016;Abraham48_07BB;my_Frend;d:\\there\\;d:\\there\\;d:\\there\\;d:\\there\\;Voronezh;1033x789
 10235611;rip_strong_with_wow3_sp3;D8;M_AAAA;;43;used;yes;yes;yes;30.09.2016;Nope_heipful_89;that_boy;d:\\there\\;d:\\there\\;d:\\there\\;d:\\there\\;Voronezh;956x709
