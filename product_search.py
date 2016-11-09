@@ -7,7 +7,7 @@ engine = create_engine('sqlite:///data.sqlite', echo=True)
 db_session = scoped_session(sessionmaker(bind=engine))
 
 def search1(code):
-    for (product_name,) in db_session.query(Product.product_name).filter_by(product_code=code):#, used=0, special_design=0): 
+    for (product_name,) in db_session.query(Product.product_name).filter_by(product_code=code, used=1):#, special_design=0): 
         return product_name
 
 def search2(code):
