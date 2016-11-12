@@ -3,7 +3,7 @@ from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Bool
 from sqlalchemy.orm import scoped_session, sessionmaker, relationship
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine('sqlite:///blog.sqlite')
+engine = create_engine('sqlite:///data.sqlite')
 
 db_session = scoped_session(sessionmaker(bind=engine))
 
@@ -117,14 +117,14 @@ class Storage(Base):
         self.vendor
         )
 
-class Input_file(Base):
+class InputFile(Base):
     __tablename__ = 'input_file'
     id = Column(Integer, primary_key=True)
     input_file_name = Column(String(50))
     input_file_type = Column(String(20))
     action_file_time = Column(DateTime)
     file_status = Column(String(20))
-    products_in_file = relationship("Products_in_file", backref="input_file")
+    products_in_file = relationship("ProductInFile", backref="input_file")
 
     def __repr__(self):
         return '<Product {} {} {} {} {}>' .format(
@@ -134,32 +134,25 @@ class Input_file(Base):
         self.file_status
         )
 
-class Products_in_file(Base):
+class ProductInFile(Base):
     __tablename__ = 'products_in_file'
     id = Column(Integer, primary_key=True)
-    product_id = Column(String, ForeignKey('products.id'))
-    product_name = Column(String, ForeignKey('products.product_name'))
-    product_code = Column(String, ForeignKey('products.product_code'))
-    special_code = Column(Stringr, ForeignKey('products.special_code'))
-    city_code = Column(Stringr, ForeignKey('products.city_code'))
-    input_quantity = Column(Integer(4))
-    reject_quantity = Column(Integer(4))
-    produced_quantity = Column(Integer(4))
+    product_id = Column(Integer, ForeignKey('products.id'))
+    input_quantity = Column(Integer)
+    reject_quantity = Column(Integer)
+    produced_quantity = Column(Integer)
     product_in_file_status = Column(String(20))
-    input_file_name = Column(String, ForeignKey('input_file.input_file_name'))
+    input_file_id = Column(Integer, ForeignKey('input_file.id'))
+    product = relationship("Product")
 
     def __repr__(self):
-        return '<Product {} {} {} {} {}>' .format(
+        return '<ProductInFile {} {} {} {} {} {}>' .format(
         self.product_id,
-        self.product_name,
-        self.product_code,
-        self.special_code
-        self.city_code,
         self.input_quantity,
         self.reject_quantity,
         self.produced_quantity,
         self.product_in_file_status,
-        self.
+        self.input_file_id
         )
 
 
