@@ -29,9 +29,9 @@ def copy_file():
 
 def add_action():
     for filename in filenames:
-        action = Action(datetime.now(), 0, filename, 0, 'product_id', 'reason', 'bot')      
+        action = Action(datetime.now(), "file_copy", filename, 0, 'product_id', 'reason', 'bot')
+        count = 0      
         for (input_file_name,) in db_session.query(Action.input_file_name):
-            count = 0
             if input_file_name == filename:
                 print("replay")
                 count += 1     
