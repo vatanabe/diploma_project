@@ -13,38 +13,74 @@ def index():
 
 @app.route("/1")
 def first():
-    result = "<table><tr><th>Продукт</th><th>Количество</th><th>На складе</th><th>Наличие</th></tr>"
+    result = "<head><meta charset='utf-8'><meta http-equiv='X-UA-Compatible' \
+    content='IE=edge'><meta name='viewport' content='width=device-width, \
+    initial-scale=1'><link href='static/css/bootstrap.min.css' rel='stylesheet'>\
+    </head><body><!DOCTYPE html><html lang='en'><table class='table table-bordered'>\
+    <tr><th>Продукт</th><th>Начальное количество</th><th>Итоговое количество</th>\
+    <th>Брак</th><th>На складе</th><th>Наличие</th></tr>"
     for name in values_count1:
         if values_count1[name] <= amount1(name):
             availability = "Достаточно"
         else:
             availability = "Нехватка"
-        result += "<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>" % (search1(name), values_count1[name], amount1(name), availability)
-    result += "</table>"
+        result += "<tr>\
+        <td>%s</td>\
+        <td>%s</td>\
+        <td><div class='col-xs-6'><input type='number' class='form-control' placeholder='Введите..'></div></td>\
+        <td><div class='col-xs-6'><input type='number' class='form-control' placeholder='Введите..'></div></td>\
+        <td>%s</td>\
+        <td>%s</td>\
+        </tr>" % (search1(name), values_count1[name], amount1(name), availability)
+    result += "</table><body></html>"
     return result
 
 @app.route("/2")
 def second():
-    result = "<table><tr><th>Продукт</th><th>Количество</th><th>На складе</th><th>Наличие</th></tr>"
+    result = "<head><meta charset='utf-8'><meta http-equiv='X-UA-Compatible' \
+    content='IE=edge'><meta name='viewport' content='width=device-width, \
+    initial-scale=1'><link href='static/css/bootstrap.min.css' rel='stylesheet'>\
+    </head><body><!DOCTYPE html><html lang='en'><table class='table table-bordered'>\
+    <tr><th>Продукт</th><th>Начальное количество</th><th>Итоговое количество</th>\
+    <th>Брак</th><th>На складе</th><th>Наличие</th></tr>"
     for name in values_count2:
         if values_count2[name] <= amount2(name):
             availability = "Достаточно"
         else:
             availability = "Нехватка"
-        result += "<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>" % (search2(name), values_count2[name], amount2(name), availability)
-    result += "</table>"
+        result += "<tr>\
+        <td>%s</td>\
+        <td>%s</td>\
+        <td><div class='col-xs-6'><input type='number' class='form-control' placeholder='Введите..'></div></td>\
+        <td><div class='col-xs-6'><input type='number' class='form-control' placeholder='Введите..'></div></td>\
+        <td>%s</td>\
+        <td>%s</td>\
+        </tr>" % (search2(name), values_count2[name], amount2(name), availability)
+    result += "</table><body></html>"
     return result
 
 @app.route("/3")
 def third():
-    result = "<table><tr><th>Продукт</th><th>Количество</th><th>На складе</th><th>Наличие</th></tr>"
+    result = "<head><meta charset='utf-8'><meta http-equiv='X-UA-Compatible' \
+    content='IE=edge'><meta name='viewport' content='width=device-width, \
+    initial-scale=1'><link href='static/css/bootstrap.min.css' rel='stylesheet'>\
+    </head><body><!DOCTYPE html><html lang='en'><table class='table table-bordered'>\
+    <tr><th>Продукт</th><th>Начальное количество</th><th>Итоговое количество</th>\
+    <th>Брак</th><th>На складе</th><th>Наличие</th></tr>"
     for name in data:
         if values_count2[name] <= amount3(name):
             availability = "Достаточно"
         else:
             availability = "Нехватка"
-        result += "<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>" % (search3(name), data[name], amount3(name), availability)
-    result += "</table>"
+        result += "<tr>\
+        <td>%s</td>\
+        <td>%s</td>\
+        <td><div class='col-xs-6'><input type='number' class='form-control' placeholder='Введите..'></div></td>\
+        <td><div class='col-xs-6'><input type='number' class='form-control' placeholder='Введите..'></div></td>\
+        <td>%s</td>\
+        <td>%s</td>\
+        </tr>" % (search3(name), data[name], amount3(name), availability)
+    result += "</table><body></html>"
     return result
 
 if __name__ == "__main__":
