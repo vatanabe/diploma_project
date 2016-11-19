@@ -68,7 +68,13 @@ def add_input_file():
             copy_file()
             db_session.add(input_file)
             db_session.commit()
-            time.sleep(10)
+            if "OMG" in filename:
+                for name in values_count1:
+                    product = db_session.query(Product.product_name).filter_by(product_code=name)
+                    input_quantity = values_count1[name]
+                    product_in_file = ProductInFile(product_id = product.id, input_quantity, reject_quantity = 0, produced_quantity = 0, 
+                product_in_file_status = "started", input_file_id = input_file.id)
+                #time.sleep(10)
         else:
             print("else2")
 
