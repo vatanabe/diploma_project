@@ -13,35 +13,14 @@ def index():
 
 @app.route("/1")
 def first():
-    result = "<head><meta charset='utf-8'><meta http-equiv='X-UA-Compatible' \
-    content='IE=edge'><meta name='viewport' content='width=device-width, \
-    initial-scale=1'><link href='static/css/bootstrap.min.css' rel='stylesheet'>\
-    </head><body><!DOCTYPE html><html lang='en'><table class='table table-bordered table-hover'>\
-    <tr><th>Продукт</th><th>Начальное количество</th><th>Итоговое количество</th>\
-    <th>Брак</th><th>На складе</th><th>Наличие</th><th>Готовность</th></tr>"
-    for name in values_count1:
-        if values_count1[name] <= amount1(name):
-            availability = "Достаточно"
-        else:
-            availability = "Нехватка"
-        result += "<tr>\
-        <td>%s</td>\
-        <td>%s</td>\
-        <td><div class='col-xs-6'><input type='number' class='form-control' placeholder='Введите..'></div></td>\
-        <td><div class='col-xs-6'><input type='number' class='form-control' placeholder='Введите..'></div></td>\
-        <td>%s</td>\
-        <td>%s</td>\
-        <td><p><button type='button' class='btn btn-primary btn-sm'>Готово</button></p></td>\
-        </tr>" % (search1(name), values_count1[name], amount1(name), availability)
-    result += "</table></body></html>"
-    return result
+    return render_template('1.html', title="OMG", values_count1=values_count1, amount1=amount1, search1=search1)
 
 @app.route("/2")
 def second():
     result = "<head><meta charset='utf-8'><meta http-equiv='X-UA-Compatible' \
     content='IE=edge'><meta name='viewport' content='width=device-width, \
     initial-scale=1'><link href='static/css/bootstrap.min.css' rel='stylesheet'>\
-    </head><body><!DOCTYPE html><html lang='en'><table class='table table-bordered table-hover'>\
+    </head><body><!DOCTYPE html><html lang='en'><table class='table table-bordered table-hover table-striped'>\
     <tr><th>Продукт</th><th>Начальное количество</th><th>Итоговое количество</th>\
     <th>Брак</th><th>На складе</th><th>Наличие</th><th>Готовность</th></tr>"
     for name in values_count2:
@@ -66,7 +45,7 @@ def third():
     result = "<head><meta charset='utf-8'><meta http-equiv='X-UA-Compatible' \
     content='IE=edge'><meta name='viewport' content='width=device-width, \
     initial-scale=1'><link href='static/css/bootstrap.min.css' rel='stylesheet'>\
-    </head><body><!DOCTYPE html><html lang='en'><table class='table table-bordered table-hover'>\
+    </head><body><!DOCTYPE html><html lang='en'><table class='table table-bordered table-hover table-striped'>\
     <tr><th>Продукт</th><th>Начальное количество</th><th>Итоговое количество</th>\
     <th>Брак</th><th>На складе</th><th>Наличие</th><th>Готовность</th></tr>"
     for name in data:
