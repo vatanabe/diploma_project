@@ -1,8 +1,8 @@
 from sqlalchemy.orm import scoped_session, sessionmaker, load_only
 from sqlalchemy import create_engine
-from products_db import Product, Storage
+from products_db2 import Product, Storage
 
-engine = create_engine('sqlite:///blog.sqlite', echo=True)
+engine = create_engine('sqlite:///data.sqlite', echo=True)
 
 db_session = scoped_session(sessionmaker(bind=engine))
 
@@ -13,5 +13,6 @@ def find_in_db(what_to_fitd, code):
     return product
 
 if __name__ == "__main__":
-    prod_vendor = find_in_db("prod_vendor", "I5")
-    print(prod_vendor.prod_vendor)
+ #   prod_vendor = find_in_db("prod_vendor", "I5")
+    what_to_fitd = find_in_db("id", "I5")
+    print(what_to_fitd)

@@ -1,7 +1,22 @@
 import csv
-from products_db import Product, Storage, Action, db_session
+from products_db2 import Product, Storage, Action, db_session
 import datetime
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Boolean
+from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Boolean, create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker, load_only
+
+engine = create_engine('sqlite:///data.sqlite', echo=True)
+
+db_session = scoped_session(sessionmaker(bind=engine))
+
+def find_in_db(what_to_fitd, code):
+
+    product = db_session.query(Product).options(load_only(what_to_fitd))\
+    .filter_by(product_code=code, special_design=0).first()
+    return product
+  
+ #   prod_vendor = find_in_db("prod_vendor", "I5")
+ #   print(prod_vendor.prod_vendor)
+
 
 
 def add_new_product_to_sqlite(
@@ -71,6 +86,7 @@ def add_new_product_to_sqlite(
 
 
 def add_new_specdisign_to_sqlite(
+    product_name,
     product_code,
     special_code,
     link_contactless,
@@ -91,18 +107,38 @@ def add_new_specdisign_to_sqlite(
     else:
         add_date = None
 
+    parent_id = find_in_db("id", product_code)
+    parent_id = parent_id.id
+    product_bin = find_in_db("product_bin", product_code)
+    product_bin = product_bin.product_bin
+    prod_chip = find_in_db("prod_chip", product_code)
+    prod_chip = prod_chip.prod_chip
+    prod_vendor = find_in_db("prod_vendor", product_code)
+    prod_vendor = prod_vendor.prod_vendor
+    contactless_interface = find_in_db("contactless_interface", product_code)
+    contactless_interface = contactless_interface.contactless_interface
+    back_side_image = find_in_db("back_side_image", product_code)
+    back_side_image = back_side_image.back_side_image
+
     product = Product(
-    product_code = product_code,
-    special_code = special_code,
-    used = used,
-    special_design = special_design,
-    link_contactless = link_contactless,
-    add_date = add_date,
-    front_side_image = front_side_image,
-    back_side_print = back_side_print,
-    city = city,
-    images_pixels = images_pixels
-    )
+        product_bin = product_bin,
+        product_name = product_name,
+        product_code = product_code,
+        special_code = special_code,
+        parent_id = parent_id,
+        used = used,
+        special_design = special_design,
+        contactless_interface = contactless_interface,
+        link_contactless = link_contactless,
+        add_date = add_date,
+        prod_chip = prod_chip,
+        prod_vendor = prod_vendor,
+        front_side_image = front_side_image,
+        back_side_print = back_side_print,
+        city = city,
+        back_side_image = back_side_image,
+        images_pixels = images_pixels
+        )
     db_session.add(product)
    
     action_datetime = datetime.datetime.now()
@@ -192,7 +228,7 @@ if __name__ == "__main__":
  #       'Moscow', '')
 
 #    add_new_product_to_sqlite('10235611', 'rip_strong_with_wow5', 'P8', '40', 'used', 'yes', 'yes', '05.11.2016', 'Nope_heipful_89', 'that_boy', '///neni', '///eini')
-    add_new_specdisign_to_sqlite('D8', 'I_TRY_TO_ADD_NEW', 'yes', '09.11.2016', '/////ieie', '///nhenh', 'Kurgat', '1061x933')
+    add_new_specdisign_to_sqlite('rip_strong_with_wow3_sp16', 'D8', 'I_TRY_TO_ADD_NEW8', 'yes', '09.11.2016', '/////ieie', '///nhenh', 'Kurgat', '1061x933')
 #    add_quantity_to_storage('1', '1', '1', 'yes', 'yes', 'colored', '3000', '3000', '', '51', \
 #        '', 'Abraham48_07BB', 'my_Frend')
 

@@ -1,5 +1,5 @@
 import csv
-from products_db import Product, db_session
+from products_db2 import Product, db_session
 import datetime
 from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Boolean
 
