@@ -11,8 +11,8 @@ def search1(code):
         return product_name
 
 def search2(code):
-    for (special_code,) in db_session.query(Product.special_code).filter_by(special_code=code): 
-        return special_code
+    for (product_name,) in db_session.query(Product.product_name).filter_by(special_code=code): 
+        return product_name
 
 def search3(code):
     for (product_name,) in db_session.query(Product.product_name).filter_by(city_code=code): 
