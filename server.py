@@ -17,7 +17,7 @@ def index():
 
 @app.route("/1")
 def first():
-    return render_template('1.html', title="OMG", values_count1=values_count1, amount1=amount1, search1=search1)
+    return render_template('1.html', title="OMG", values_count1=values_count1, amount1=amount1, search1=search1, id=ProductInFile.id)
 
 @app.route("/2")
 def second():
@@ -30,14 +30,12 @@ def third():
 @app.route("/submit", methods=["POST"])
 def submit():
     engine = create_engine('sqlite:///data.sqlite')
-    db_session = scoped_session(sessionmaker(bind=engine))
-    product_in_file = ProductInFile(reject_quantity=request.form.get('reject_quantity'), 
-    produced_quantity=request.form.get('produced_quantity'), product_in_file_status="started")
-    """product_in_file = product_in_file.query.filter_by()
+    db_session = scoped_session(sessionmaker())
+    product_in_file = ProductInFile.query.filter(ProductInFile.id==request.form.get('id'))
+    print(request.form.get('id'))
     product_in_file.reject_quantity=request.form.get('reject_quantity')
     product_in_file.produced_quantity=request.form.get('produced_quantity')
     product_in_file.product_in_file_status="processed"
-    print(product_in_file)"""
     db_session.commit()
     return "OK"
 
