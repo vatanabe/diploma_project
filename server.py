@@ -1,9 +1,13 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from parsing1 import values_count1
 from parsing2 import values_count2
 from parsing3 import data
 from product_search import search1, search2, search3
 from product_amount import amount1, amount2, amount3
+from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy import Column, Integer, String, Text, ForeignKey
+from products_db import Action, InputFile, ProductInFile, Product
 
 app = Flask(__name__)
 
@@ -23,9 +27,19 @@ def second():
 def third():
     return render_template('3.html', title="OPT_LOCAL_MIFARE", data=data, amount3=amount3, search3=search3)
 
-@app.route("/submit")
+@app.route("/submit", methods=["POST"])
 def submit():
-    return
+    engine = create_engine('sqlite:///data.sqlite')
+    db_session = scoped_session(sessionmaker(bind=engine))
+    product_in_file = ProductInFile(reject_quantity=request.form.get('reject_quantity'), 
+    produced_quantity=request.form.get('produced_quantity'), product_in_file_status="started")
+    """product_in_file = product_in_file.query.filter_by()
+    product_in_file.reject_quantity=request.form.get('reject_quantity')
+    product_in_file.produced_quantity=request.form.get('produced_quantity')
+    product_in_file.product_in_file_status="processed"
+    print(product_in_file)"""
+    db_session.commit()
+    return "OK"
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)

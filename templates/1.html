@@ -27,12 +27,12 @@
         <th>Готовность</th>
       </tr>
         {% for name in values_count1 %}
-        <form>
+        <form method="POST" action="/submit">
         <tr>
           <td>{{ search1(name) }}</td>
           <td>{{ values_count1[name] }}</td>
-          <td><div class='col-xs-6'><input type='number' class='form-control' value={{ values_count1[name] }}></div></td>
-          <td><div class='col-xs-6'><input type='number' class='form-control' value='0'></div></td>
+          <td><div class='col-xs-6'><input type='number' class='form-control' value={{ values_count1[name] }} name="produced_quantity"></div></td>
+          <td><div class='col-xs-6'><input type='number' class='form-control' value='0' name="reject_quantity"></div></td>
           <td>{{ amount1(name) }}</td>
           <td>
           {% if values_count1[name] <= amount1(name) %}
