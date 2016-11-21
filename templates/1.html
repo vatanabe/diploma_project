@@ -27,6 +27,7 @@
         <th>Готовность</th>
       </tr>
         {% for name in values_count1 %}
+        <form>
         <tr>
           <td>{{ search1(name) }}</td>
           <td>{{ values_count1[name] }}</td>
@@ -40,12 +41,14 @@
           Нехватка
           {% endif %}
           </td>
-          <td><p><a type='button' href="/" class='btn btn-primary btn-sm'>Готово</a></p></td>
+          <td><p><button type='submit' class='btn btn-primary btn-sm'>Готово</button></p></td>
         </tr>
+        </form>
         {% endfor %}
     </table>
     <tr>
         <center><p><a type='button' href="/" class='btn btn-success btn-lg'>Подтвердить</a></p></center>
+        <center><span class="help-block">Для подтверждения необходимо принять каждую строку.</span></center>
     </tr>
   </body>
 </html>
