@@ -17,53 +17,11 @@ def first():
 
 @app.route("/2")
 def second():
-    result = "<head><meta charset='utf-8'><meta http-equiv='X-UA-Compatible' \
-    content='IE=edge'><meta name='viewport' content='width=device-width, \
-    initial-scale=1'><link href='static/css/bootstrap.min.css' rel='stylesheet'>\
-    </head><body><!DOCTYPE html><html lang='en'><table class='table table-bordered table-hover table-striped'>\
-    <tr><th>Продукт</th><th>Начальное количество</th><th>Итоговое количество</th>\
-    <th>Брак</th><th>На складе</th><th>Наличие</th><th>Готовность</th></tr>"
-    for name in values_count2:
-        if values_count2[name] <= amount2(name):
-            availability = "Достаточно"
-        else:
-            availability = "Нехватка"
-        result += "<tr>\
-        <td>%s</td>\
-        <td>%s</td>\
-        <td><div class='col-xs-6'><input type='number' class='form-control' placeholder='Введите..'></div></td>\
-        <td><div class='col-xs-6'><input type='number' class='form-control' placeholder='Введите..'></div></td>\
-        <td>%s</td>\
-        <td>%s</td>\
-        <td><p><button type='button' class='btn btn-primary btn-sm'>Готово</button></p></td>\
-        </tr>" % (search2(name), values_count2[name], amount2(name), availability)
-    result += "</table></body></html>"
-    return result
-
+    return render_template('2.html', title="MIN_DESIGN", values_count2=values_count2, amount2=amount2, search2=search2)
+    
 @app.route("/3")
 def third():
-    result = "<head><meta charset='utf-8'><meta http-equiv='X-UA-Compatible' \
-    content='IE=edge'><meta name='viewport' content='width=device-width, \
-    initial-scale=1'><link href='static/css/bootstrap.min.css' rel='stylesheet'>\
-    </head><body><!DOCTYPE html><html lang='en'><table class='table table-bordered table-hover table-striped'>\
-    <tr><th>Продукт</th><th>Начальное количество</th><th>Итоговое количество</th>\
-    <th>Брак</th><th>На складе</th><th>Наличие</th><th>Готовность</th></tr>"
-    for name in data:
-        if values_count2[name] <= amount3(name):
-            availability = "Достаточно"
-        else:
-            availability = "Нехватка"
-        result += "<tr>\
-        <td>%s</td>\
-        <td>%s</td>\
-        <td><div class='col-xs-6'><input type='number' class='form-control' placeholder='Введите..'></div></td>\
-        <td><div class='col-xs-6'><input type='number' class='form-control' placeholder='Введите..'></div></td>\
-        <td>%s</td>\
-        <td>%s</td>\
-        <td><p><button type='button' class='btn btn-primary btn-sm'>Готово</button></p></td>\
-        </tr>" % (search3(name), data[name], amount3(name), availability)
-    result += "</table></body></html>"
-    return result
+    return render_template('3.html', title="OPT_LOCAL_MIFARE", data=data, amount3=amount3, search3=search3)
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
