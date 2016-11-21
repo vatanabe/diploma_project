@@ -23,5 +23,9 @@ def second():
 def third():
     return render_template('3.html', title="OPT_LOCAL_MIFARE", data=data, amount3=amount3, search3=search3)
 
+@app.route("/submit")
+def submit():
+    return
+
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
