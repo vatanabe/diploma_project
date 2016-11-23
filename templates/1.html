@@ -26,23 +26,23 @@
         <th>Наличие</th>
         <th>Готовность</th>
       </tr>
-        {% for name in values_count1 %}
-        <form method="POST" action="/submit">
-        <tr>
-          <td>{{ search1(name) }}</td>
-          <td>{{ values_count1[name] }}</td>
-          <td><div class='col-xs-6'><input type='number' class='form-control' value={{ values_count1[name] }} name="produced_quantity"></div></td>
+        {% for code in values_count1 %}
+        <form method="POST" action="/submit1">
+        <tr {% if change_color(code) == "processed" %}class="success"{% endif %}>
+          <td>{{ search1(code) }}</td>
+          <td>{{ values_count1[code] }}</td>
+          <td><div class='col-xs-6'><input type='number' class='form-control' value={{values_count1[code]}} name="produced_quantity"></div></td>
           <td><div class='col-xs-6'><input type='number' class='form-control' value='0' name="reject_quantity"></div></td>
-          <td>{{ amount1(name) }}</td>
+          <td>{{ amount1(code) }}</td>
           <td>
-          {% if values_count1[name] <= amount1(name) %}
+          {% if values_count1[code] <= amount1(code) %}
           Достаточно
           {% else %}
           Нехватка
           {% endif %}
           </td>
           <td><p><button type='submit' class='btn btn-primary btn-sm'>Готово</button></p></td>
-          <input type="hidden" name="id" value="{{ id }}">
+          <input type="hidden" name="id" value={{search4(code)}}>
         </tr>
         </form>
         {% endfor %}
