@@ -168,7 +168,7 @@ def add_input_file(filenames):
                     product = product.query.filter_by(product_code=code, used=1).first()
                     print(product)
                     input_quantity = values_count1[code]
-                    product_in_file = ProductInFile(product_id = product.id, input_quantity = input_quantity, reject_quantity = 0, produced_quantity = 0, 
+                    product_in_file = ProductInFile(product_id = product.id, input_quantity = input_quantity, reject_quantity = 0, produced_quantity = input_quantity, 
                     product_in_file_status = "started", input_file_id = input_file.id)
                     db_session.add(product_in_file)
                     db_session.commit()
@@ -179,7 +179,7 @@ def add_input_file(filenames):
                     product = product.query.filter_by(special_code=code).first()
                     print(product)
                     input_quantity = values_count2[code]
-                    product_in_file = ProductInFile(product_id = product.id, input_quantity = input_quantity, reject_quantity = 0, produced_quantity = 0, 
+                    product_in_file = ProductInFile(product_id = product.id, input_quantity = input_quantity, reject_quantity = 0, produced_quantity = input_quantity, 
                     product_in_file_status = "started", input_file_id = input_file.id)
                     db_session.add(product_in_file)
                     db_session.commit()
@@ -190,7 +190,7 @@ def add_input_file(filenames):
                     product = product.query.filter_by(city_code=code).first()
                     print(product)
                     input_quantity = data[code]
-                    product_in_file = ProductInFile(product_id = product.id, input_quantity = input_quantity, reject_quantity = 0, produced_quantity = 0, 
+                    product_in_file = ProductInFile(product_id = product.id, input_quantity = input_quantity, reject_quantity = 0, produced_quantity = input_quantity, 
                     product_in_file_status = "started", input_file_id = input_file.id)
                     db_session.add(product_in_file)
                     db_session.commit()

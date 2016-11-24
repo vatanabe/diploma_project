@@ -27,3 +27,13 @@ def change_color(code):
     for (id,) in db_session.query(Product.id).filter_by(product_code=code):
         for (product_in_file_status,) in db_session.query(ProductInFile.product_in_file_status).filter_by(product_id=id):
             return product_in_file_status
+
+def produced_quantity(code):
+    for (id,) in db_session.query(Product.id).filter_by(product_code=code):
+        for (produced_quantity,) in db_session.query(ProductInFile.produced_quantity).filter_by(product_id=id):
+            return produced_quantity
+
+def reject_quantity(code):
+    for (id,) in db_session.query(Product.id).filter_by(product_code=code):
+        for (reject_quantity,) in db_session.query(ProductInFile.reject_quantity).filter_by(product_id=id):
+            return reject_quantity

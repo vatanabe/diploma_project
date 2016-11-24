@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from parsing1 import values_count1
 from parsing2 import values_count2
 from parsing3 import data
-from product_search import search1, search2, search3, search4, change_color
+from product_search import search1, search2, search3, search4, change_color, reject_quantity, produced_quantity
 from product_amount import amount1, amount2, amount3
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -17,7 +17,8 @@ def index():
 
 @app.route("/1")
 def first():
-    return render_template('1.html', title="OMG", values_count1=values_count1, amount1=amount1, search1=search1, search4=search4, change_color=change_color)
+    return render_template('1.html', title="OMG", values_count1=values_count1, amount1=amount1, search1=search1, 
+    search4=search4, change_color=change_color, produced_quantity=produced_quantity, reject_quantity=reject_quantity)
 
 @app.route("/2")
 def second():
@@ -37,7 +38,8 @@ def submit():
     change.produced_quantity=request.form.get('produced_quantity')
     change.product_in_file_status="processed"
     db_session.commit()
-    return render_template('1.html', title="OMG", values_count1=values_count1, amount1=amount1, search1=search1, search4=search4, change_color=change_color)
+    return render_template('1.html', title="OMG", values_count1=values_count1, amount1=amount1, search1=search1,
+    search4=search4, change_color=change_color,  produced_quantity=produced_quantity, reject_quantity=reject_quantity)
 
 
 if __name__ == "__main__":
