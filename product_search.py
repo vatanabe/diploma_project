@@ -1,6 +1,8 @@
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy import create_engine
 from products_db import Product, ProductInFile
+import os
+import fnmatch
 
 engine = create_engine('sqlite:///data.sqlite')
 
@@ -37,3 +39,11 @@ def reject_quantity(code):
     for (id,) in db_session.query(Product.id).filter_by(product_code=code):
         for (reject_quantity,) in db_session.query(ProductInFile.reject_quantity).filter_by(product_id=id):
             return reject_quantity
+
+def file_search():
+    path = os.path.join("/", "projects", "test2")
+    #Путь указываем в составном виде, чтобы он подходил для рахных ОС
+    for file in os.listdir(path):
+        if fnmatch.fnmatch(file, 'OMG*'):  #Поиск среди файлов текущей папки по маске
+            filename = file
+            return filename
