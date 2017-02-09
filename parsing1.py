@@ -1,9 +1,9 @@
+#парсинг файла первого типа
 import os
 import fnmatch
 from collections import Counter
 path = os.path.join("/", "projects", "test2")
 #Путь указываем в составном виде, чтобы он подходил для рахных ОС
-
 for file in os.listdir(path):
     if fnmatch.fnmatch(file, 'OMG*'): #Поиск среди файлов текущей папки по маске
         full_path = os.path.join("/", path, file)

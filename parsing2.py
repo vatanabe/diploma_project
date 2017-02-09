@@ -1,3 +1,4 @@
+#парсинг файла второго типа
 import os
 import fnmatch
 from collections import Counter

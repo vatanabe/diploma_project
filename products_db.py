@@ -1,3 +1,4 @@
+#описание таблицы с продуктами
 from sqlalchemy import create_engine
 from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Boolean, Date
 from sqlalchemy.orm import scoped_session, sessionmaker, relationship

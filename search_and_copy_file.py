@@ -19,7 +19,7 @@ path = os.path.join("/", "projects", "test")
 engine = create_engine('sqlite:///data.sqlite')
 
 db_session = scoped_session(sessionmaker(bind=engine))
-
+#создание списка названий файлов в папке
 def get_filenames():
     filenames = []
 
@@ -31,7 +31,7 @@ def get_filenames():
         elif fnmatch.fnmatch(file, 'TOP_LOCAL_MIFARE*'):
             filenames.append(file)
     return filenames
-
+#копирование файла
 def copy_file():
     for file in os.listdir(path):
         
@@ -122,7 +122,7 @@ def copy_file():
             elif fnmatch.fnmatch(file, '*Arhangelsk*'):
                 count = len(lines)
                 data = {'Arhangelsk': count}
-
+#добавление сведений о копировании файла в таблицу действий
 def add_action(filenames):
     for filename in filenames:
         action = Action(action_datetime = datetime.now(), action_type  = "file_copy", input_file_name = filename, produced_by = 'bot')
@@ -143,7 +143,7 @@ def add_action(filenames):
 
         else:
             pass
-
+#добавление новых файлов в таблицу текущих работ
 def add_input_file(filenames):
     for filename in filenames:
         if "OMG" in filename:
