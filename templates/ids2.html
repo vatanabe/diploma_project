@@ -16,25 +16,15 @@
     <![endif]-->
   </head>
   <body>
-    <ul class="nav nav-pills">
-      <li role="presentation" class="active"><a href="/1">OMG</a></li>
-      <li role="presentation"><a href="/2">MIN_DESIGN</a></li>
-      <li role="presentation"><a href="/3">TOP_LOCAL_MIFARE</a></li>
-    </ul>
     <table class='table table-bordered table-hover table-striped'>
       <tr>
-        <th>Файлы в работе:</th>
+        <th>ID</th>
       </tr>
         {% for filename in filenames %}
-        <tr> 
-          <td><a href={{ href_root(filename) }}{{ href_id(started_ids(filename)) }}>{{ filename }}</a></td>
+        <tr>
+          <td>{{ filename }}</td>
         </tr>
         {% endfor %}
     </table>
-      <nav class="navbar navbar-default navbar-fixed-bottom">
-        <div class="container">
-        <p class="text-center"><strong>Версия 1.00</strong></p>
-        </div>
-      </nav>
   </body>
 </html>

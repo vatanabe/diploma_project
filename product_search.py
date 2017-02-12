@@ -1,6 +1,6 @@
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy import create_engine
-from products_db import Product, ProductInFile
+from products_db import Product, ProductInFile, InputFile
 import os
 import fnmatch
 
@@ -47,3 +47,27 @@ def file_search():
         if fnmatch.fnmatch(file, 'OMG*'):  #Поиск среди файлов текущей папки по маске
             filename = file
             return filename
+#поиск названий файлов, которые в работе
+def started_files():
+    filenames = []
+    for (input_file_name,) in db_session.query(InputFile.input_file_name).filter_by(file_status='started'):
+        if input_file_name not in filenames:
+            filenames.append(input_file_name)
+    return filenames
+#поиск id файлов, которые в работе
+def started_ids(filename):
+    for (id,) in db_session.query(InputFile.id).filter_by(input_file_name=filename):
+        return id
+#создание адреса страницы для id
+def href_id(digit):
+    href = str(digit)
+    return str(href)
+#создание корня адреса страницы для определённого типа файла
+def href_root(filename):
+    if 'OMG' in filename:
+        href = '/omg/'
+    elif 'MIN_DESIGN' in filename:
+        href = '/md/'
+    elif 'TOP_LOCAL_MIFARE' in filename:
+        href = '/mif/'
+    return str(href)

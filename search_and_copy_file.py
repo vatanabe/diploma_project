@@ -198,7 +198,8 @@ def add_input_file(filenames):
 
 if __name__ == "__main__":
     while True:
+        copy_file()
         filenames = get_filenames()
         add_action(filenames)
         add_input_file(filenames)
-        time.sleep(10)
+        time.sleep(1)

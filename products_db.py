@@ -153,7 +153,7 @@ class ProductInFile(Base):
         self.reject_quantity,
         self.produced_quantity,
         self.product_in_file_status,
-        self.input_file_id
+        self.input_file_id,
         )
 
 

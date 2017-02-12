@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from parsing1 import values_count1
 from parsing2 import values_count2
 from parsing3 import data
-from product_search import search1, search2, search3, search4, change_color, reject_quantity, produced_quantity, file_search
+from product_search import search1, search2, search3, search4, change_color, reject_quantity, produced_quantity, file_search, started_files, started_ids, href_id, href_root
 from product_amount import amount1, amount2, amount3
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -13,19 +13,31 @@ app = Flask(__name__)
 #главная страница
 @app.route("/")
 def index():
-    return render_template('index.html', title="ТЫРЫПЫРЫ")
-#уникальная страница для каждой текущей работы
-@app.route("/files/<int:id>")
-def test(id):
-    return str(id)
-#поиск id файлов, которые в работе
-def input_file_id():
-    ids = []
-    for (input_file_id,) in db_session.query(ProductInFile.input_file_id).filter_by(product_in_file_status='started'):
-        if input_file_id not in ids:
-            ids.append(input_file_id)
-    return(ids)
-    print(ids)
+    context = {
+        'filenames': started_files(),
+    }
+    return render_template('index.html', title="ТЫРЫПЫРЫ",started_ids=started_ids, href_id=href_id, href_root=href_root, **context)
+#уникальная страница для каждой текущей работы первого типа
+@app.route("/omg/<int:id>")
+def file_id(id):
+    context = {
+        'filenames': started_files(),
+    }
+    return render_template('ids.html', title="ТЫРЫПЫРЫ",started_ids=started_ids, href_id=href_id, href_root=href_root, **context)
+#уникальная страница для каждой текущей работы второго типа
+@app.route("/md/<int:id>")
+def file_id2(id):
+    context = {
+        'filenames': started_files(),
+    }
+    return render_template('ids2.html', title="ТЫРЫПЫРЫ",started_ids=started_ids, href_id=href_id, href_root=href_root, **context)
+#уникальная страница для каждой текущей работы третьего типа
+@app.route("/mif/<int:id>")
+def file_id3(id):
+    context = {
+        'filenames': started_files(),
+    }
+    return render_template('ids3.html', title="ТЫРЫПЫРЫ",started_ids=started_ids, href_id=href_id, href_root=href_root, **context)
 #страница с выводом состава файла первого типа
 @app.route("/1")
 def first():
