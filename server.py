@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from parsing1 import values_count1
 from parsing2 import values_count2
 from parsing3 import data
-from product_search import search1, search2, search3, search4, change_color, reject_quantity, produced_quantity, file_search, started_files, started_ids, href_id, href_root
+import product_search
 from product_amount import amount1, amount2, amount3
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -14,44 +14,48 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     context = {
-        'filenames': started_files(),
+        'filenames': product_search.started_files(),
     }
-    return render_template('index.html', title="ТЫРЫПЫРЫ",started_ids=started_ids, href_id=href_id, href_root=href_root, **context)
+    return render_template('index.html', title="ТЫРЫПЫРЫ", started_ids=product_search.started_ids, href_id=product_search.href_id,
+    href_root=product_search.href_root, **context)
 #уникальная страница для каждой текущей работы первого типа
 @app.route("/omg/<int:id>")
 def file_id(id):
     context = {
-        'filenames': started_files(),
+        'filenames': product_search.started_files(),
     }
-    return render_template('ids.html', title="ТЫРЫПЫРЫ",started_ids=started_ids, href_id=href_id, href_root=href_root, **context)
+    return render_template('ids.html', title="ТЫРЫПЫРЫ", started_ids=product_search.started_ids, href_id=product_search.href_id,
+    href_root=product_search.href_root, identificator=id, **context)
 #уникальная страница для каждой текущей работы второго типа
 @app.route("/md/<int:id>")
 def file_id2(id):
     context = {
-        'filenames': started_files(),
+        'filenames': product_search.started_files(),
     }
-    return render_template('ids2.html', title="ТЫРЫПЫРЫ",started_ids=started_ids, href_id=href_id, href_root=href_root, **context)
+    return render_template('ids2.html', title="ТЫРЫПЫРЫ", started_ids=product_search.started_ids, href_id=product_search.href_id,
+    href_root=product_search.href_root, identificator=id, **context)
 #уникальная страница для каждой текущей работы третьего типа
 @app.route("/mif/<int:id>")
 def file_id3(id):
     context = {
-        'filenames': started_files(),
+        'filenames': product_search.started_files(),
     }
-    return render_template('ids3.html', title="ТЫРЫПЫРЫ",started_ids=started_ids, href_id=href_id, href_root=href_root, **context)
+    return render_template('ids3.html', title="ТЫРЫПЫРЫ", started_ids=product_search.started_ids, href_id=product_search.href_id,
+    href_root=product_search.href_root, identificator=id, **context)
 #страница с выводом состава файла первого типа
 @app.route("/1")
 def first():
-    return render_template('1.html', title="OMG", values_count1=values_count1, amount1=amount1, search1=search1, 
-    search4=search4, change_color=change_color, produced_quantity=produced_quantity, reject_quantity=reject_quantity,
-    file_search=file_search)
+    return render_template('1.html', title="OMG", values_count1=values_count1, amount1=amount1, search1=product_search.search1, 
+    search4=product_search.search4, change_color=product_search.change_color, produced_quantity=product_search.produced_quantity,
+    reject_quantity=product_search.reject_quantity, file_search=product_search.file_search)
 #страница с выводом состава файла второго типа
 @app.route("/2")
 def second():
-    return render_template('2.html', title="MIN_DESIGN", values_count2=values_count2, amount2=amount2, search2=search2)
+    return render_template('2.html', title="MIN_DESIGN", values_count2=values_count2, amount2=amount2, search2=product_search.search2)
 #страница с выводом состава файла третьего типа    
 @app.route("/3")
 def third():
-    return render_template('3.html', title="OPT_LOCAL_MIFARE", data=data, amount3=amount3, search3=search3)
+    return render_template('3.html', title="OPT_LOCAL_MIFARE", data=data, amount3=amount3, search3=product_search.search3)
 #страница - подтверждение строки
 @app.route("/submit1", methods=["POST"])
 def submit1():
@@ -63,9 +67,9 @@ def submit1():
     change.produced_quantity=request.form.get('produced_quantity')
     change.product_in_file_status="processed"
     db_session.commit()
-    return render_template('1.html', title="OMG", values_count1=values_count1, amount1=amount1, search1=search1,
-    search4=search4, change_color=change_color,  produced_quantity=produced_quantity, reject_quantity=reject_quantity,
-    file_search=file_search)
+    return render_template('1.html', title="OMG", values_count1=values_count1, amount1=amount1, search1=product_search.search1,
+    search4=product_search.search4, change_color=product_search.change_color,  produced_quantity=product_search.produced_quantity,
+    reject_quantity=product_search.reject_quantity, file_search=product_search.file_search)
 #страница - подтверждение всей страницы работы
 @app.route("/submit2", methods=["POST"])
 def submit2():
@@ -90,9 +94,9 @@ def submit2():
             db_session.add(reject)
             print(reject)
             db_session.commit()
-    return render_template('1.html', title="OMG", values_count1=values_count1, amount1=amount1, search1=search1,
-    search4=search4, change_color=change_color,  produced_quantity=produced_quantity, reject_quantity=reject_quantity,
-    file_search=file_search)
+    return render_template('1.html', title="OMG", values_count1=values_count1, amount1=amount1, search1=product_search.search1,
+    search4=product_search.search4, change_color=product_search.change_color,  produced_quantity=product_search.produced_quantity,
+    reject_quantity=product_search.reject_quantity, file_search=product_search.file_search)
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
