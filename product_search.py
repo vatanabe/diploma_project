@@ -20,23 +20,28 @@ def search3(code):
     for (product_name,) in db_session.query(Product.product_name).filter_by(city_code=code): 
         return product_name
 #поиск id в таблице текущих работ по коду продукта (необходимо дополнить поиск по id файла в работе)
-def search4(code):
-    for (id,) in db_session.query(Product.id).filter_by(product_code=code):
+def search4(product_name):
+    for (id,) in db_session.query(Product.id).filter_by(product_name=product_name):
         for (id,) in db_session.query(ProductInFile.id).filter_by(product_id=id):
             return id
 #поиск значения статуса продукта в текущих работах для изменения цвета строки (подтверждение) (необходимо дополнить поиск по id файла в работе)
-def change_color(code):
-    for (id,) in db_session.query(Product.id).filter_by(product_code=code):
+def change_color(product_name):
+    for (id,) in db_session.query(Product.id).filter_by(product_name=product_name):
         for (product_in_file_status,) in db_session.query(ProductInFile.product_in_file_status).filter_by(product_id=id):
             return product_in_file_status
+#поиск стартового количества продукта для производства
+def start_quantity(product_name):
+    for (id,) in db_session.query(Product.id).filter_by(product_name=product_name):
+        for (input_quantity,) in db_session.query(ProductInFile.input_quantity).filter_by(product_id=id):
+            return input_quantity
 #поиск количества выполненнго продукта в текущих работах (необходимо дополнить поиск по id файла в работе)
-def produced_quantity(code):
-    for (id,) in db_session.query(Product.id).filter_by(product_code=code):
+def produced_quantity(product_name):
+    for (id,) in db_session.query(Product.id).filter_by(product_name=product_name):
         for (produced_quantity,) in db_session.query(ProductInFile.produced_quantity).filter_by(product_id=id):
             return produced_quantity
 #поиск количества бракованного продукта в текущих работах (необходимо дополнить поиск по id файла в работе)
-def reject_quantity(code):
-    for (id,) in db_session.query(Product.id).filter_by(product_code=code):
+def reject_quantity(product_name):
+    for (id,) in db_session.query(Product.id).filter_by(product_name=product_name):
         for (reject_quantity,) in db_session.query(ProductInFile.reject_quantity).filter_by(product_id=id):
             return reject_quantity
 #функция поиска названия файла в папке для отображения его на странице текущей работы (бесполезная??)
@@ -71,3 +76,10 @@ def href_root(filename):
     elif 'TOP_LOCAL_MIFARE' in filename:
         href = '/mif/'
     return str(href)
+#создание списка продуктов в работе
+def started_products(file_id):
+    started_products = []
+    for (product_id,) in db_session.query(ProductInFile.product_id).filter_by(input_file_id=file_id):
+        for (product_name,) in db_session.query(Product.product_name).filter_by(id=product_id):
+            started_products.append(product_name)
+    return started_products

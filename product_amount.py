@@ -6,9 +6,16 @@ engine = create_engine('sqlite:///data.sqlite')
 
 db_session = scoped_session(sessionmaker(bind=engine))
 #количество на складе продуктов первого типа
-def amount1(code):
+"""def amount1(code):
     total_product_quantity = 0
     for (id, prod_chip, prod_vendor) in db_session.query(Product.id, Product.prod_chip, Product.prod_vendor).filter_by(product_code=code):
+        for (product_quantity,) in db_session.query(Storage.product_quantity).filter_by(product_type='new', product_id=id, 
+            chip=prod_chip, vendor=prod_vendor):
+            total_product_quantity += product_quantity
+    return total_product_quantity"""
+def amount1(product_name):
+    total_product_quantity = 0
+    for (id, prod_chip, prod_vendor) in db_session.query(Product.id, Product.prod_chip, Product.prod_vendor).filter_by(product_name=product_name):
         for (product_quantity,) in db_session.query(Storage.product_quantity).filter_by(product_type='new', product_id=id, 
             chip=prod_chip, vendor=prod_vendor):
             total_product_quantity += product_quantity

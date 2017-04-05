@@ -25,7 +25,10 @@ def file_id(id):
         'filenames': product_search.started_files(),
     }
     return render_template('ids.html', title="ТЫРЫПЫРЫ", started_ids=product_search.started_ids, href_id=product_search.href_id,
-    href_root=product_search.href_root, identificator=id, **context)
+    href_root=product_search.href_root, identificator=id, started_products=product_search.started_products,
+    change_color=product_search.change_color, start_quantity=product_search.start_quantity,
+    produced_quantity=product_search.produced_quantity, reject_quantity=product_search.reject_quantity,
+    amount1=amount1, search4=product_search.search4, **context)
 #уникальная страница для каждой текущей работы второго типа
 @app.route("/md/<int:id>")
 def file_id2(id):

@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>{{  title }}</title>
     <!-- Bootstrap -->
-    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -18,13 +18,33 @@
   <body>
     <table class='table table-bordered table-hover table-striped'>
       <tr>
-        <th>ID</th>
-        <th>{{ identificator }}</th>
+        <th>Продукт</th>
+        <th>Начальное количество</th>
+        <th>Итоговое количество</th>
+        <th>Брак</th>
+        <th>На складе</th>
+        <th>Наличие</th>
+        <th>Готовность</th>
       </tr>
-        {% for filename in filenames %}
-        <tr>
-          <td>{{ started_ids(filename) }}</td>
+        {% for product_name in started_products(identificator) %}
+        <form method="POST" action="/submit1">
+        <tr {% if change_color(product_name) == "processed" %}class="success"{% endif %}>
+          <td>{{ product_name }}</td>
+          <td>{{ start_quantity(product_name) }}</td>
+          <td><div class='col-xs-6'><input type='number' class='form-control' value={{produced_quantity(product_name)}} name="produced_quantity"></div></td>
+          <td><div class='col-xs-6'><input type='number' class='form-control' value={{reject_quantity(product_name)}} name="reject_quantity"></div></td>
+          <td>{{ amount1(product_name) }}</td>
+          <td>
+          {% if start_quantity(product_name) <= amount1(product_name) %}
+          Достаточно
+          {% else %}
+          Нехватка
+          {% endif %}
+          </td>
+          <td><p><button type='submit' class='btn btn-primary btn-sm'>Готово</button></p></td>
+          <input type="hidden" name="id" value={{search4(product_name)}}>
         </tr>
+        </form>
         {% endfor %}
     </table>
   </body>
