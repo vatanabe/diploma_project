@@ -28,24 +28,32 @@
       </tr>
         {% for product_name in started_products(identificator) %}
         <form method="POST" action="/submit1">
-        <tr {% if change_color(product_name) == "processed" %}class="success"{% endif %}>
+        <tr {% if change_color(product_name, identificator) == "processed" %}class="success"{% endif %}>
           <td>{{ product_name }}</td>
-          <td>{{ start_quantity(product_name) }}</td>
-          <td><div class='col-xs-6'><input type='number' class='form-control' value={{produced_quantity(product_name)}} name="produced_quantity"></div></td>
-          <td><div class='col-xs-6'><input type='number' class='form-control' value={{reject_quantity(product_name)}} name="reject_quantity"></div></td>
+          <td>{{ start_quantity(product_name, identificator) }}</td>
+          <td><div class='col-xs-6'><input type='number' class='form-control' value={{produced_quantity(product_name, identificator)}} name="produced_quantity"></div></td>
+          <td><div class='col-xs-6'><input type='number' class='form-control' value={{reject_quantity(product_name, identificator)}} name="reject_quantity"></div></td>
           <td>{{ amount1(product_name) }}</td>
           <td>
-          {% if start_quantity(product_name) <= amount1(product_name) %}
+          {% if start_quantity(product_name, identificator) <= amount1(product_name) %}
           Достаточно
           {% else %}
           Нехватка
           {% endif %}
           </td>
           <td><p><button type='submit' class='btn btn-primary btn-sm'>Готово</button></p></td>
-          <input type="hidden" name="id" value={{search4(product_name)}}>
+          <input type="hidden" name="id" value={{search4(product_name, identificator)}}>
+          <input type="hidden" name="file_id" value={{identificator}}>
         </tr>
         </form>
         {% endfor %}
     </table>
+    <tr>
+      <form method="POST" action="/submit2">
+      <center><p><button type='submit' class='btn btn-success btn-lg'>Подтвердить</button></p></center>
+      <input type="hidden" name="file_id" value={{identificator}}>
+      <center><span class="help-block">Для подтверждения необходимо принять каждую строку.</span></center>
+      </form>
+    </tr>
   </body>
 </html>

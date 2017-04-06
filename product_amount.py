@@ -15,11 +15,15 @@ db_session = scoped_session(sessionmaker(bind=engine))
     return total_product_quantity"""
 def amount1(product_name):
     total_product_quantity = 0
+    completed_quantity = 0
     for (id, prod_chip, prod_vendor) in db_session.query(Product.id, Product.prod_chip, Product.prod_vendor).filter_by(product_name=product_name):
         for (product_quantity,) in db_session.query(Storage.product_quantity).filter_by(product_type='new', product_id=id, 
             chip=prod_chip, vendor=prod_vendor):
             total_product_quantity += product_quantity
-    return total_product_quantity
+        for (used_product_quantity,) in db_session.query(Storage.product_quantity).filter_by(product_type='complete', product_id=id, 
+            chip=prod_chip, vendor=prod_vendor):
+            completed_quantity += used_product_quantity
+    return (total_product_quantity-completed_quantity)
 #количество на складе продуктов второго типа
 def amount2(code):
     for (id, prod_chip, prod_vendor) in db_session.query(Product.id, Product.prod_chip, Product.prod_vendor).filter_by(special_code=code):

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from parsing1 import values_count1
 from parsing2 import values_count2
 from parsing3 import data
@@ -65,14 +65,12 @@ def submit1():
     engine = create_engine('sqlite:///data.sqlite')
     db_session = scoped_session(sessionmaker(bind=engine))
     #product_in_file = ProductInFile
-    change = db_session.query(ProductInFile).filter_by(id=request.form.get('id')).first()
+    change = db_session.query(ProductInFile).filter_by(id=request.form.get('id'), input_file_id=request.form.get('file_id')).first()
     change.reject_quantity=request.form.get('reject_quantity')
     change.produced_quantity=request.form.get('produced_quantity')
     change.product_in_file_status="processed"
     db_session.commit()
-    return render_template('1.html', title="OMG", values_count1=values_count1, amount1=amount1, search1=product_search.search1,
-    search4=product_search.search4, change_color=product_search.change_color,  produced_quantity=product_search.produced_quantity,
-    reject_quantity=product_search.reject_quantity, file_search=product_search.file_search)
+    return redirect(url_for('file_id', id=request.form.get('file_id')))
 #страница - подтверждение всей страницы работы
 @app.route("/submit2", methods=["POST"])
 def submit2():
@@ -81,25 +79,21 @@ def submit2():
     product_in_file = ProductInFile
     storage = Storage
     product = Product
-    file_name = db_session.query(InputFile).filter_by(input_file_name=request.form.get('file_name')).first()
-    print("file name")
-    if db_session.query(ProductInFile).filter_by(input_file_id=file_name.id, product_in_file_status="started").count() > 0:
+    file_ident=request.form.get('file_id')
+    if db_session.query(ProductInFile).filter_by(input_file_id=request.form.get('file_id'), product_in_file_status="started").count() > 0:
         return "Необходимо принять каждую строку"
     else:
-        product_in_file = product_in_file.query.filter_by(input_file_id=file_name.id, product_in_file_status="processed").all()
+        product_in_file = product_in_file.query.filter_by(input_file_id=request.form.get('file_id'), product_in_file_status="processed").all()
         print(product_in_file)
         for product in product_in_file:
             print("for")
             produce = Storage(product_id=product.product_id, product_type="complete", product_quantity=product.produced_quantity)
             db_session.add(produce)
-            print(produce)
             reject = Storage(product_id=product.product_id, product_type="perso_reject", product_quantity=product.reject_quantity)
             db_session.add(reject)
-            print(reject)
             db_session.commit()
-    return render_template('1.html', title="OMG", values_count1=values_count1, amount1=amount1, search1=product_search.search1,
-    search4=product_search.search4, change_color=product_search.change_color,  produced_quantity=product_search.produced_quantity,
-    reject_quantity=product_search.reject_quantity, file_search=product_search.file_search)
+            print(amount1('misa_glass1_with_pop'))
+    return redirect(url_for('file_id', id=file_ident))
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
