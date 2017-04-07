@@ -1,13 +1,14 @@
-#парсинг файла третьего типа
+# парсинг файла третьего типа
 import os
 import fnmatch
 from collections import Counter
 path = os.path.join("/", "projects", "test2")
-#Путь указываем в составном виде, чтобы он подходил для рахных ОС
+# Путь указываем в составном виде, чтобы он подходил для рахных ОС
 for file in os.listdir(path):
-    if fnmatch.fnmatch(file, 'TOP_LOCAL_MIFARE*'): #Поиск среди файлов текущей папки по маске
+    # Поиск среди файлов текущей папки по маске
+    if fnmatch.fnmatch(file, 'TOP_LOCAL_MIFARE*'):
         full_path = os.path.join("/", path, file)
-with open(full_path, 'r') as myfile: #Чтение файла построчно
+with open(full_path, 'r') as myfile:  # Чтение файла построчно
     lines = myfile.readlines()
     data = {}
     if fnmatch.fnmatch(file, '*ShChPR*'):
